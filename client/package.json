@@ -1,0 +1,17 @@
+{
+  "name": "studtrackp-client",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server public --port=3000",
+    "build": "echo \"Add build steps here\""
+  },
+    "devDependencies": {
+    "live-server": "^1.2.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

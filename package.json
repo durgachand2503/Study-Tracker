@@ -1,0 +1,30 @@
+{
+  "name": "studtrack",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "start:client": "npm --workspace client start",
+    "start:server": "npm --workspace server start",
+    "dev": "concurrently \"npm run start:server\" \"npm run start:client\""
+  },
+   "devDependencies": {
+    "concurrently": "^7.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/durgachand2503/Study-Tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/durgachand2503/Study-Tracker/issues"
+  },
+  "homepage": "https://github.com/durgachand2503/Study-Tracker#readme",
+  "description": ""
+}
