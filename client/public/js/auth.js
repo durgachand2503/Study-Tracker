@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const result = await registerUser(data);
         localStorage.setItem('token', result.token);
         alert('Registered successfully!');
-        window.location.href = '/dashboard.html';
+        window.location.href = '/login.html';
       } catch (err) {
         alert(err.message);
       }
@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         const result = await loginUser(data);
         localStorage.setItem('token', result.token);
-        alert('Logged in!');
         window.location.href = '/dashboard.html';
       } catch (err) {
         alert(err.message);
