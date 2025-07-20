@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>StudTrack • Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <nav class="navbar">
+  <div class="navbar__brand">
+    <a href="student-dashboard.html" id="nav-brand">StudyPal</a>
+  </div>
+  <div class="navbar__links">
+    <a href="student-dashboard.html">Dashboard</a>
+    <a href="channels.html">Channels</a>
+    <a href="timer.html">Study Timer</a>
+    <a href="tasks.html">Tasks</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="groups.html">Groups</a>
+    <a href="profile.html">Profile</a>
+    <a href="#" id="nav-logout">Logout</a>
+  </div>
+</nav>
+
+  <div class="main">
+    <div class="header">
+      <h1 id="welcome">Welcome back!</h1>
+      <div id="todayDate"></div>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3>Total Study Time</h3>
+        <p id="totalTime">--h --m</p>
+      </div>
+      <div class="card">
+        <h3>Current Streak</h3>
+        <p id="streakDays">-- days</p>
+      </div>
+      <div class="card">
+        <h3>Today's Sessions</h3>
+        <p id="todaySessions">--</p>
+      </div>
+      <div class="card">
+        <h3>Weekly Progress</h3>
+        <p id="weeklyProgress">--%</p>
+      </div>
+    </div>
+    <h2>Study Activity Heatmap</h2>
+    <div id="heatmap">
+      <!-- JS will fill .heat-cell -->
+    </div>
+  </div>
+
+  <script type="module" src="js/api.js"></script>
+  <script type="module">
+    import { getCurrentUser } from './js/api.js';
+    const user = getCurrentUser();
+    if (!user) {
+      if (confirm('Continue as guest?')) {
+        document.getElementById('welcome').textContent = 'Welcome, Guest!';
+      } else {
+        window.location = 'login.html';
+      }
+    } else {
+      document.getElementById('welcome').textContent = `Welcome back, ${user.name}!`;
+    }
+    document.getElementById('logout').onclick = () => {
+      localStorage.removeItem('token');
+      window.location = 'login.html';
+    };
+    document.getElementById('todayDate').textContent = new Date().toLocaleDateString();
+    // TODO: fetch and populate totalTime, streakDays, etc.
+  </script>
+</body>
+</html>

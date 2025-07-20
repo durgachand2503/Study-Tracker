@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Channels — StudyPal</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    body { margin: 0; padding-top: 60px; }
+    .container { max-width: 800px; margin: auto; padding: 1rem; }
+    .channel { border: 1px solid #ddd; padding: 1rem; margin: 1rem 0; border-radius: 6px; background: #fafafa; }
+    .btn { display: inline-block; margin-right: 0.5rem; padding: 0.4rem 0.8rem; border: none; border-radius: 4px; cursor: pointer; color: #fff; }
+    .btn-view { background: #17a2b8; }
+    .btn-join { background: #28a745; }
+    .video-list { margin-top: 1rem; padding-left: 1rem; }
+    .video-item { padding: 0.5rem 0; border-bottom: 1px solid #eee; }
+    .add-video { margin-top: 1rem; }
+    .add-video input { width: calc(100% - 10px); margin: 0.3rem 0; padding: 0.4rem; }
+    .add-video button { background: #007bff; color: #fff; padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <!-- Shared Navbar -->
+  <nav class="navbar">
+    <div class="navbar__brand">
+      <a href="student-dashboard.html">StudyPal</a>
+    </div>
+    <div class="navbar__links">
+      <a href="student-dashboard.html">Dashboard</a>
+      <a href="channels.html">Channels</a>
+      <a href="timer.html">Study Timer</a>
+      <a href="tasks.html">Tasks</a>
+      <a href="analytics.html">Analytics</a>
+      <a href="groups.html">Groups</a>
+      <a href="profile.html">Profile</a>
+      <a href="#" id="nav-logout">Logout</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Mentor-only creation form -->
+    <section id="mentorSection">
+      <h2>Create New Channel</h2>
+      <form id="createForm">
+        <input name="title" placeholder="Channel Title" required>
+        <input name="description" placeholder="Description">
+        <input name="tags" placeholder="Tags (comma-separated)">
+        <select name="visibility">
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+        </select>
+        <button type="submit">Create Channel</button>
+      </form>
+    </section>
+
+    <!-- Channel list -->
+    <div id="channelsList">Loading channels…</div>
+  </div>
+
+  <script type="module" src="js/api.js"></script>
+  <script type="module" src="js/channels.js"></script>
+  <script>
+    // Logout handler
+    document.getElementById('nav-logout').onclick = () => {
+      localStorage.removeItem('token');
+      window.location = 'login.html';
+    };
+  </script>
+</body>
+</html>

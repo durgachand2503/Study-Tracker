@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html>
-<head><title>Register</title></head>
-<body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="container">
   <h2>Register</h2>
-    <form id="registerForm">
-    <input name="name" placeholder="Name" required><br>
-    <input name="username" placeholder="Username" required><br>
-    <input name="email" type="email" placeholder="Email" required><br>
-    <input name="password" type="password" placeholder="Password" required><br>
+  <form id="registerForm">
+    <input name="name" placeholder="Full Name" required>
+    <input name="username" placeholder="Username" required>
+    <input name="email"     type="email" placeholder="Email"    required>
+    <input name="password"  type="password" placeholder="Password" required>
     <select name="role">
-        <option value="student">Student</option>
-        <option value="mentor">Mentor</option>
-    </select><br>
+      <option value="student">Student</option>
+      <option value="mentor">Mentor</option>
+    </select>
     <button type="submit">Register</button>
-    <p><a href="index.html">← Back to Home</a></p>
     <p>Already have an account? <a href="login.html">Login</a></p>
-    </form>
-<script type="module" src="js/auth.js"></script>
-
+  </form>
+  <script type="module" src="js/api.js"></script>
+  <script type="module" src="js/auth.js"></script>
 </body>
 </html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mentor • Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <nav class="navbar">
+  <div class="navbar__brand">
+    <a href="student-dashboard.html" id="nav-brand">StudyPal</a>
+  </div>
+  <div class="navbar__links">
+    <a href="student-dashboard.html">Dashboard</a>
+    <a href="channels.html">Channels</a>
+    <a href="timer.html">Study Timer</a>
+    <a href="tasks.html">Tasks</a>
+    <a href="analytics.html">Analytics</a>
+    <a href="groups.html">Groups</a>
+    <a href="profile.html">Profile</a>
+    <a href="#" id="nav-logout">Logout</a>
+  </div>
+</nav>
+
+  <div class="main">
+    <div class="header">
+      <h1 id="welcomeMentor">Welcome back, Mentor!</h1>
+      <div id="todayDateMentor"></div>
+    </div>
+    <div class="cards">
+      <div class="widget">
+        <h3>Your Channels</h3>
+        <p id="channelCount">--</p>
+      </div>
+      <div class="widget">
+        <h3>Students Enrolled</h3>
+        <p id="studentCount">--</p>
+      </div>
+      <div class="widget">
+        <h3>Assignments Submitted</h3>
+        <p id="submissionCount">--</p>
+      </div>
+      <div class="widget">
+        <h3>Active Channels</h3>
+        <p id="activeChannels">--</p>
+      </div>
+    </div>
+    <h2>Channel Analytics</h2>
+    <table>
+      <thead>
+        <tr><th>Channel</th><th>Members</th><th>Actions</th></tr>
+      </thead>
+      <tbody id="analyticsTable">
+        <!-- JS will fill rows -->
+      </tbody>
+    </table>
+  </div>
+
+  <script type="module" src="js/api.js"></script>
+  <script type="module">
+    import { getCurrentUser, listChannels } from './js/api.js';
+    const user = getCurrentUser();
+    if (!user || user.role !== 'mentor') {
+      alert('Mentor login required');
+      window.location = 'login.html';
+    } else {
+      document.getElementById('welcomeMentor').textContent = `Welcome back, ${user.name}!`;
+    }
+    document.getElementById('logout').onclick = () => {
+      localStorage.removeItem('token');
+      window.location = 'login.html';
+    };
+    document.getElementById('todayDateMentor').textContent = new Date().toLocaleDateString();
+
+    // Fetch channels and populate analyticsTable
+    (async function loadAnalytics() {
+      try {
+        const channels = await listChannels();
+        document.getElementById('channelCount').textContent = channels.length;
+        const tbody = document.getElementById('analyticsTable');
+        channels.forEach(ch => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td>${ch.title}</td>
+            <td>${ch.members.length}</td>
+            <td><button onclick="alert('Details for ${ch.title}')">Details</button></td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  </script>
+</body>
+</html>

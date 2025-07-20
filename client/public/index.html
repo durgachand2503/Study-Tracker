@@ -1,16 +1,767 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudTrack - Smart Study Management Application</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudTrack - Master Your Study Journey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --blue-50: #eff6ff;
+      --blue-100: #dbeafe;
+      --blue-600: #2563eb;
+      --blue-700: #1d4ed8;
+      --purple-50: #f5f3ff;
+      --purple-600: #7c3aed;
+      --green-600: #16a34a;
+      --yellow-600: #d97706;
+      --red-600: #dc2626;
+      --indigo-600: #4f46e5;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-400: #9ca3af;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      --white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(to bottom right, var(--blue-50), var(--white), var(--purple-50));
+      color: var(--gray-900);
+      line-height: 1.5;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Header */
+    header {
+      background-color: var(--white);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 4rem;
+      padding: 0 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-icon {
+      height: 2rem;
+      width: 2rem;
+      color: var(--blue-600);
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .get-started-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      background-color: var(--blue-600);
+      color: var(--white);
+      border-radius: 0.5rem;
+      font-weight: 500;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .get-started-btn:hover {
+      background-color: var(--blue-700);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .get-started-btn .icon {
+      height: 1rem;
+      width: 1rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 5rem 1rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3.75rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      line-height: 1;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(to right, var(--blue-600), var(--purple-600));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--gray-600);
+      margin-bottom: 2rem;
+      max-width: 56rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background-color: var(--blue-600);
+      color: var(--white);
+      border-radius: 0.75rem;
+      font-size: 1.125rem;
+      font-weight: 500;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-btn:hover {
+      background-color: var(--blue-700);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .cta-btn .icon {
+      height: 1.25rem;
+      width: 1.25rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+    }
+
+    @media (min-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      color: var(--gray-600);
+    }
+
+    /* Features Section */
+    .section {
+      padding: 5rem 1rem;
+    }
+
+    .section-white {
+      background-color: var(--white);
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: var(--gray-600);
+      text-align: center;
+      max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 4rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .feature-card {
+      padding: 2rem;
+      background-color: var(--gray-50);
+      border-radius: 1rem;
+      border: 1px solid var(--gray-100);
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover {
+      background-color: var(--white);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .feature-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-icon .icon {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-description {
+      color: var(--gray-600);
+    }
+
+    /* How It Works */
+    .section-gradient {
+      background: linear-gradient(to right, var(--blue-50), var(--purple-50));
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .steps-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .step-card {
+      text-align: center;
+    }
+
+    .step-number {
+      width: 4rem;
+      height: 4rem;
+      background-color: var(--blue-600);
+      color: var(--white);
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 1.5rem;
+    }
+
+    .step-2 .step-number {
+      background-color: var(--purple-600);
+    }
+
+    .step-3 .step-number {
+      background-color: var(--green-600);
+    }
+
+    .step-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-description {
+      color: var(--gray-600);
+    }
+
+    /* Testimonials */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .testimonial-card {
+      padding: 2rem;
+      background-color: var(--gray-50);
+      border-radius: 1rem;
+    }
+
+    .testimonial-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-avatar {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 9999px;
+      object-fit: cover;
+      margin-right: 1rem;
+    }
+
+    .testimonial-name {
+      font-weight: 600;
+    }
+
+    .testimonial-role {
+      font-size: 0.875rem;
+      color: var(--gray-600);
+    }
+
+    .testimonial-university {
+      font-size: 0.875rem;
+      color: var(--gray-500);
+    }
+
+    .testimonial-quote {
+      color: var(--gray-700);
+      font-style: italic;
+    }
+
+    /* CTA Section */
+    .section-cta {
+      background: linear-gradient(to right, var(--blue-600), var(--purple-600));
+      padding: 5rem 1rem;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+
+    .cta-subtitle {
+      font-size: 1.25rem;
+      color: rgba(219, 234, 254, 0.9);
+      margin-bottom: 2rem;
+    }
+
+    .cta-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      background-color: var(--white);
+      color: var(--blue-600);
+      border-radius: 0.75rem;
+      font-size: 1.125rem;
+      font-weight: 500;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-btn-secondary:hover {
+      background-color: var(--gray-50);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--gray-900);
+      color: var(--white);
+      padding: 3rem 1rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo-icon {
+      height: 2rem;
+      width: 2rem;
+      color: var(--blue-400);
+    }
+
+    .footer-logo-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .footer-description {
+      color: var(--gray-400);
+    }
+
+    .footer-heading {
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-link {
+      color: var(--gray-400);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .footer-divider {
+      border-top: 1px solid var(--gray-800);
+      padding-top: 2rem;
+      text-align: center;
+      color: var(--gray-400);
+    }
+  </style>
 </head>
 <body>
-    <body>
-  <h1>Welcome to Study Tracker</h1>
-  <p>Select an action below:</p>
-  <a href="register.html">Register</a><br>
-  <a href="login.html">Login</a>
-</body>
+  <!-- Header -->
+  <header>
+    <div class="header-container container">
+      <div class="logo">
+        <i data-lucide="book-open" class="logo-icon"></i>
+        <h1 class="logo-text">StudTrack</h1>
+      </div>
+      <button class="get-started-btn" id="getStartedBtn">
+        <span>Get Started</span>
+        <i data-lucide="arrow-right" class="icon"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Master Your <span>Study Journey</span></h1>
+      <p>Transform your learning experience with intelligent study tracking, expert mentorship, and gamified progress that keeps you motivated every step of the way.</p>
+      <button class="cta-btn" id="ctaBtn">
+        <span>Start Learning Today</span>
+        <i data-lucide="arrow-right" class="icon"></i>
+      </button>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">50K+</div>
+          <div class="stat-label">Active Students</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2K+</div>
+          <div class="stat-label">Expert Mentors</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">1M+</div>
+          <div class="stat-label">Study Hours Tracked</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">95%</div>
+          <div class="stat-label">Success Rate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section section-white">
+    <div class="container">
+      <h2 class="section-title">Everything You Need to Excel</h2>
+      <p class="section-subtitle">Comprehensive tools designed to help students and mentors achieve their academic goals</p>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background-color: rgba(37, 99, 235, 0.1);">
+            <i data-lucide="timer" class="icon" style="color: #2563eb;"></i>
+          </div>
+          <h3 class="feature-title">Smart Study Timer</h3>
+          <p class="feature-description">Track your study sessions with our Pomodoro-style timer and build consistent habits.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background-color: rgba(22, 163, 74, 0.1);">
+            <i data-lucide="calendar" class="icon" style="color: #16a34a;"></i>
+          </div>
+          <h3 class="feature-title">Task Management</h3>
+          <p class="feature-description">Organize assignments, set priorities, and never miss a deadline with our integrated calendar.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background-color: rgba(124, 58, 237, 0.1);">
+            <i data-lucide="bar-chart-3" class="icon" style="color: #7c3aed;"></i>
+          </div>
+          <h3 class="feature-title">Progress Analytics</h3>
+          <p class="feature-description">Visualize your study patterns with interactive charts and productivity insights.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background-color: rgba(217, 119, 6, 0.1);">
+            <i data-lucide="award" class="icon" style="color: #d97706;"></i>
+          </div>
+          <h3 class="feature-title">Achievement System</h3>
+          <p class="feature-description">Earn badges and unlock rewards as you reach your study goals and milestones.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background-color: rgba(220, 38, 38, 0.1);">
+            <i data-lucide="users" class="icon" style="color: #dc2626;"></i>
+          </div>
+          <h3 class="feature-title">Mentor Channels</h3>
+          <p class="feature-description">Join expert-led learning communities with video lessons and assignments.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon" style="background-color: rgba(79, 70, 229, 0.1);">
+            <i data-lucide="book-open" class="icon" style="color: #4f46e5;"></i>
+          </div>
+          <h3 class="feature-title">Personalized Learning</h3>
+          <p class="feature-description">Get custom study plans and mentor recommendations based on your goals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="section section-gradient">
+    <div class="container">
+      <h2 class="section-title">How StudTrack Works</h2>
+      <p class="section-subtitle">Get started in three simple steps</p>
+
+      <div class="steps-grid">
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3 class="step-title">Sign Up & Set Goals</h3>
+          <p class="step-description">Create your account as a student or mentor and define your learning objectives</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card step-2">
+          <div class="step-number">2</div>
+          <h3 class="step-title">Track & Learn</h3>
+          <p class="step-description">Use our study timer, join mentor channels, and complete tasks to build momentum</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card step-3">
+          <div class="step-number">3</div>
+          <h3 class="step-title">Achieve Success</h3>
+          <p class="step-description">Monitor your progress, earn badges, and reach your academic milestones</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section section-white">
+    <div class="container">
+      <h2 class="section-title">Loved by Students & Mentors</h2>
+      <p class="section-subtitle">See what our community has to say about StudTrack</p>
+
+      <div class="testimonials-grid">
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Sarah Chen" class="testimonial-avatar">
+            <div>
+              <h4 class="testimonial-name">Sarah Chen</h4>
+              <p class="testimonial-role">Computer Science Student</p>
+              <p class="testimonial-university">Stanford University</p>
+            </div>
+          </div>
+          <p class="testimonial-quote">"StudTrack helped me increase my study time by 40% and maintain a consistent schedule."</p>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <img src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Dr. Michael Johnson" class="testimonial-avatar">
+            <div>
+              <h4 class="testimonial-name">Dr. Michael Johnson</h4>
+              <p class="testimonial-role">Mathematics Mentor</p>
+              <p class="testimonial-university">MIT</p>
+            </div>
+          </div>
+          <p class="testimonial-quote">"The mentor channels feature allows me to reach and help hundreds of students effectively."</p>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <img src="https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Emily Rodriguez" class="testimonial-avatar">
+            <div>
+              <h4 class="testimonial-name">Emily Rodriguez</h4>
+              <p class="testimonial-role">Pre-Med Student</p>
+              <p class="testimonial-university">Harvard University</p>
+            </div>
+          </div>
+          <p class="testimonial-quote">"The gamification aspect keeps me motivated, and the analytics help me optimize my study habits."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="section-cta">
+    <div class="container" style="max-width: 56rem;">
+      <h2 class="cta-title">Ready to Transform Your Learning?</h2>
+      <p class="cta-subtitle">Join thousands of students and mentors who are already achieving their goals with StudTrack</p>
+      <button class="cta-btn-secondary" id="ctaBtnSecondary">
+        <a href="login.html"><span>Get Started Free</span></a>
+        <i data-lucide="arrow-right" class="icon"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Column 1 -->
+        <div>
+          <div class="footer-logo">
+            <i data-lucide="book-open" class="footer-logo-icon"></i>
+            <h3 class="footer-logo-text">StudTrack</h3>
+          </div>
+          <p class="footer-description">
+            Empowering students and mentors to achieve academic excellence through intelligent tracking and community learning.
+          </p>
+        </div>
+
+        <!-- Column 2 -->
+        <div>
+          <h4 class="footer-heading">Features</h4>
+          <ul class="footer-links">
+            <li class="footer-link">Study Timer</li>
+            <li class="footer-link">Task Management</li>
+            <li class="footer-link">Progress Analytics</li>
+            <li class="footer-link">Badge System</li>
+          </ul>
+        </div>
+
+        <!-- Column 3 -->
+        <div>
+          <h4 class="footer-heading">Community</h4>
+          <ul class="footer-links">
+            <li class="footer-link">Mentor Channels</li>
+            <li class="footer-link">Student Forums</li>
+            <li class="footer-link">Success Stories</li>
+            <li class="footer-link">Help Center</li>
+          </ul>
+        </div>
+
+        <!-- Column 4 -->
+        <div>
+          <h4 class="footer-heading">Company</h4>
+          <ul class="footer-links">
+            <li class="footer-link">About Us</li>
+            <li class="footer-link">Privacy Policy</li>
+            <li class="footer-link">Terms of Service</li>
+            <li class="footer-link">Contact</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-divider">
+        <p>&copy; 2024 StudTrack. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Handle button clicks
+    document.getElementById('getStartedBtn').addEventListener('click', function() {
+      window.location.href = 'login.html';
+    });
+
+    document.getElementById('ctaBtn').addEventListener('click', function() {
+      window.location.href = 'login.html';
+    });
+
+    document.getElementById('ctaBtnSecondary').addEventListener('click', function() {
+      window.location.href = 'login.html';
+    });
+  </script>
 </body>
 </html>
